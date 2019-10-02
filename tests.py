@@ -1,5 +1,4 @@
 from app import app
-
 from unittest import TestCase, main as unittest_main, mock
 from bson.objectid import ObjectId
 
@@ -28,11 +27,13 @@ class PlaylistsTests(TestCase):
         self.client = app.test_client()
 
         app.config['TESTING'] = True
+    
     def test_index(self):
         """Test the playlists homepage."""
         result = self.client.get('/')
         self.assertEqual(result.status, '200 OK')
         self.assertIn(b'Playlist', result.data)
+        
     def test_new(self):
         """Test the new playlist creation page."""
         result = self.client.get('/playlists/new')
